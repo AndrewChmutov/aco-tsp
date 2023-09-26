@@ -12,6 +12,7 @@ include_directories(ant
 add_executable(ant 
     src/main.cpp
     src/graph_handler.cpp
+    src/acolony.cpp
 )
 
 target_link_libraries(ant)
