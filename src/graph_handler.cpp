@@ -17,3 +17,15 @@ void GraphHandler::getGraph(std::vector<Point> &graph, const double limit, const
         y = dist(randEngine);
     }
 }
+
+
+void GraphHandler::writeGraph(const std::vector<Point> &graph, const std::string &path) {
+    // Output file
+    std::ofstream file(path);
+
+    // Headers
+    file << "x,y\n";
+
+    for (const auto& [x, y] : graph)
+        file << x << ',' << y << '\n';
+}

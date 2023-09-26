@@ -18,5 +18,7 @@ int main(int argc, char* argv[]) {
         std::cout << x << ' ' << y << '\n';
     }
 
+    GraphHandler::writeGraph(graph, "data/graph.csv");
+
     return EXIT_SUCCESS;
 }
