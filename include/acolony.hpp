@@ -39,7 +39,9 @@ class AColony {
     // Get length of the path
     double calculateLength(const std::vector<int>& path) const;
 public:
-    AColony(const std::vector<Point>& graph, double alpha = 1.0, double beta = 1.0, double rho = 0.2);
+    AColony(const std::vector<Point>& graph, double alpha = 1.0, 
+            double beta = 1.0, double rho = 0.2, 
+            double Q = 1.0, double K = 1.0);
 
     // Calculate path for TSP
     void fit();
