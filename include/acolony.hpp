@@ -34,10 +34,10 @@ class AColony {
     void setPheromones();
 
     // Get Euclidean distance
-    double calculateDistance(const Point& p1, const Point& p2)const;
+    double calculateDistance(const Point& p1, const Point& p2) const;
 
     // Get length of the path
-    double calculateLength(const std::vector<int>& path);
+    double calculateLength(const std::vector<int>& path) const;
 public:
     AColony(const std::vector<Point>& graph, double alpha = 1.0, double beta = 1.0, double rho = 0.2);
 
@@ -52,7 +52,4 @@ public:
 
     // Get best score
     double getBestScore() const;
-
-    // Write result to a file
-    void writePath(const std::string& path);
 };
