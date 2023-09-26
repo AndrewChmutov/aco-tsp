@@ -9,6 +9,9 @@ include_directories(ant
     ${PROJECT_SOURCE_DIR}/include
 )
 
-add_executable(ant src/main.cpp)
+add_executable(ant 
+    src/main.cpp
+    src/graph_handler.cpp
+)
 
 target_link_libraries(ant)
