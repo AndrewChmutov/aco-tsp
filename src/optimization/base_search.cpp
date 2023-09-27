@@ -6,8 +6,8 @@
 // Custom libraries
 #include "optimization/parameter_set.hpp"
 
-BaseSearch::BaseSearch(ParameterSet start, ParameterSet end) : 
-                        startSearch{start}, endSearch{end} {}
+BaseSearch::BaseSearch(ParameterSet start, ParameterSet end, double step) : 
+                        startSearch{start}, endSearch{end}, step{step} {}
 
 
 void BaseSearch::setLogStream(std::mutex* mtx, std::ostream* out) {

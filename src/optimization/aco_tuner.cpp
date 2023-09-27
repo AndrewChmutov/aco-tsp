@@ -12,6 +12,7 @@
 ACOTuner::ACOTuner(const std::vector<Point>& graph,
                     const ParameterSet& startSearch,
                     const ParameterSet& endSearch,
+                    double step,
                     const BaseStrategy& strategy,
                     int n_jobs, std::ostream* out) :
                 graph{graph}, 
@@ -21,7 +22,7 @@ ACOTuner::ACOTuner(const std::vector<Point>& graph,
                 out{out} {
     
     workers.reserve(n);
-    tasks = strategy.generateTasks(startSearch, endSearch, n, &mtx, out);
+    tasks = strategy.generateTasks(startSearch, endSearch, n, step, &mtx, out);
 }
 
 

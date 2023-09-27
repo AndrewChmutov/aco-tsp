@@ -9,9 +9,11 @@
 #include "parameter_set.hpp"
 
 class BaseSearch {
+protected:
     // Domain for search
     ParameterSet startSearch;
     ParameterSet endSearch;
+    double step;
 
     // Best during search
     ParameterSet bestParameters;
@@ -23,7 +25,7 @@ class BaseSearch {
     std::ostream* out;
 
 public:
-    BaseSearch(ParameterSet start, ParameterSet end);
+    BaseSearch(ParameterSet start, ParameterSet end, double step);
 
     // Search method. Has to assign:
     // - bestParameters

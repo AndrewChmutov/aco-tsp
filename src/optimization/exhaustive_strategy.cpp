@@ -10,7 +10,7 @@
 #include "optimization/exhaustive_search.hpp"
 #include "optimization/parameter_set.hpp"
 
-std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const ParameterSet &start, const ParameterSet &end, int n,
+std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const ParameterSet &start, const ParameterSet &end, double step, int n,
                                                                     std::mutex* mtx, std::ostream* out) const noexcept(false) {
     // Check if domain is given correctly
     if (start.Q > end.Q || 
@@ -35,7 +35,7 @@ std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const
     for (int i = 0; i < n; i++) {
         tempStart.alpha = alphaDelta * i;
         tempEnd.alpha = alphaDelta * (i + 1);
-        tasks.push_back(std::make_unique<ExhaustiveSearch>(tempStart, tempEnd));
+        tasks.push_back(std::make_unique<ExhaustiveSearch>(tempStart, tempEnd, step));
         tasks.back()->setLogStream(mtx, out);
     }
 

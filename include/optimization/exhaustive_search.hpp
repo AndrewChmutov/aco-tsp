@@ -6,7 +6,7 @@
 
 class ExhaustiveSearch : public BaseSearch {
 public:
-    ExhaustiveSearch(ParameterSet start, ParameterSet end);
+    ExhaustiveSearch(ParameterSet start, ParameterSet end, double step);
 
     virtual void search() override;
 };

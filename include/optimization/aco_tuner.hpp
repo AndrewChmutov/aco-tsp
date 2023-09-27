@@ -35,7 +35,8 @@ class ACOTuner {
 public:
     ACOTuner(const std::vector<Point>& graph, 
             const ParameterSet& startSearch, 
-            const ParameterSet& endSearch, 
+            const ParameterSet& endSearch,
+            double step,
             const BaseStrategy& strategy,
             int n_jobs, std::ostream* out = nullptr);
 
