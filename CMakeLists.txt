@@ -14,6 +14,7 @@ add_executable(ant
     src/graph_handler.cpp
     src/acolony.cpp
     src/optimization/base_search.cpp
+    src/optimization/aco_tuner.cpp
 )
 
 target_link_libraries(ant)
