@@ -1,6 +1,7 @@
 #include "optimization/aco_tuner.hpp"
 
 // C++ standard libraries
+#include <limits>
 #include <vector>
 
 // Custom libraries
@@ -38,4 +39,27 @@ double ACOTuner::getBestScore() const {
 }
 
 
-void ACOTuner::fit() {}
+void ACOTuner::fit() {
+    // Initialize threads
+    for (int i = 0; i < n; i++) {
+        workers.push_back(std::thread{&BaseSearch::search, tasks[i].get()});
+    }
+
+    // Join threads
+    for (auto& worker : workers) {
+        if (worker.joinable())
+            worker.join();
+    }
+
+    // Save best results
+    bestScore = std::numeric_limits<double>::max();
+    double tempScore{};
+    for (const auto& task : tasks) {
+        tempScore = task->getBestScore();
+        if (tempScore < bestScore) {
+            bestScore= tempScore;
+            bestParameters = task->getBestParameters();
+            bestPath = task->getBestPath();
+        }
+    }
+}
