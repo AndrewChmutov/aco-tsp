@@ -10,6 +10,11 @@ BaseSearch::BaseSearch(ParameterSet start, ParameterSet end) :
                         startSearch{start}, endSearch{end} {}
 
 
+void BaseSearch::setLogStream(std::mutex* mtx, std::ostream* out) {
+    this->mtx = mtx;
+    this->out = out;
+}
+
 ParameterSet BaseSearch::getBestParameters() const {
     return bestParameters;
 }

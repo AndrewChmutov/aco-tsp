@@ -2,6 +2,8 @@
 
 // C++ standard libraries
 #include <vector>
+#include <thread>
+#include <fstream>
 
 // Custom libraries
 #include "parameter_set.hpp"
@@ -16,6 +18,10 @@ class BaseSearch {
     std::vector<int> bestPath;
     double bestScore;
 
+    // Log
+    std::mutex* mtx;
+    std::ostream* out;
+
 public:
     BaseSearch(ParameterSet start, ParameterSet end);
 
@@ -24,6 +30,8 @@ public:
     // - bestPath
     // - bestScore
     virtual void search() = 0;
+
+    void setLogStream(std::mutex* mtx, std::ostream* out);
 
     // Returns best parameters after search
     ParameterSet getBestParameters() const;

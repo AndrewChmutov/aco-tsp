@@ -13,14 +13,23 @@ ACOTuner::ACOTuner(const std::vector<Point>& graph,
                     const ParameterSet& startSearch,
                     const ParameterSet& endSearch,
                     const BaseStrategy& strategy,
-                    int n_jobs) :
+                    int n_jobs, std::ostream* out) :
                 graph{graph}, 
                 startSearch{startSearch}, 
                 endSearch{endSearch}, 
-                n{n_jobs} {
+                n{n_jobs},
+                out{out} {
     
     workers.reserve(n);
-    tasks = strategy.generateTasks(startSearch, endSearch, n);
+    tasks = strategy.generateTasks(startSearch, endSearch, n, &mtx, out);
+}
+
+
+void ACOTuner::setLogStream(std::ostream *out) {
+    this->out = out;
+
+    for (auto& task : tasks)
+        task->setLogStream(&mtx, out);
 }
 
 

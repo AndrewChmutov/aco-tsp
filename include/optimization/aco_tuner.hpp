@@ -20,6 +20,10 @@ class ACOTuner {
     std::vector<std::unique_ptr<BaseSearch>> tasks;
     const int n;
 
+    // Syncronization and output
+    std::mutex mtx;
+    std::ostream* out;
+
     // Domain for search
     ParameterSet startSearch, endSearch;
 
@@ -33,10 +37,13 @@ public:
             const ParameterSet& startSearch, 
             const ParameterSet& endSearch, 
             const BaseStrategy& strategy,
-            int n_jobs);
+            int n_jobs, std::ostream* out = nullptr);
 
     // Search best parameters
     void fit();
+
+    // Sets output stream for log details
+    void setLogStream(std::ostream* out);
 
     // Returns best parameters after fit
     ParameterSet getBestParameters() const;
