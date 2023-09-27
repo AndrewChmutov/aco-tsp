@@ -26,17 +26,11 @@ public:
     virtual void search() = 0;
 
     // Returns best parameters after search
-    ParameterSet getBestParameters() const {
-        return bestParameters;
-    }
+    ParameterSet getBestParameters() const;
 
     // Returns best path after search
-    std::vector<int> getBestPath() const {
-        return bestPath;
-    }
+    std::vector<int> getBestPath() const;
 
     // Returns best score after search
-    double getBestScore() const {
-        return bestScore;
-    }
+    double getBestScore() const;
 };
