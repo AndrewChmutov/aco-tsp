@@ -25,7 +25,7 @@ std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const
     tasks.reserve(n);
 
     // Value to changed
-    double alphaDelta = (end.alpha - start.alpha) / 2;
+    double alphaDelta = (end.alpha - start.alpha) / n;
 
     // Temp values
     ParameterSet tempStart{1.0, 1.0, 0.0, 0.0, 0.0};
