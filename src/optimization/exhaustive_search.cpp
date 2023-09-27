@@ -3,6 +3,7 @@
 // C++ standard libraries
 #include <limits>
 #include <mutex>
+#include <iomanip>
 
 // Custom libraries
 #include "optimization/base_search.hpp"
@@ -38,17 +39,24 @@ void ExhaustiveSearch::search(double limit, std::size_t n) {
 
         if (out) {
             std::lock_guard<std::mutex> lock{*mtx};
-            *out << "-----id " << current_id << "-----" <<
+            *out << std::setprecision(2) << "-----id " << current_id << "-----" <<
                     "\nQ:\t" << bestParameters.Q <<
                     "\nK:\t" << bestParameters.K <<
                     "\nalpha\t" << bestParameters.alpha <<
                     "\nbeta:\t" << bestParameters.beta <<
-                    "\nrho:\t" << bestParameters.rho << '\n';
+                    "\nrho:\t" << bestParameters.rho <<
+                    "\nresult:\t" << bestScore <<
+                    "\npath:\t";
+            
+            for (auto& node : bestPath)
+                *out << node << ' ';
+
+            *out << "\n";
         }
     }
 
     std::lock_guard<std::mutex> lock{*mtx};
-    *out << "*****id " << current_id << "*****" <<
+    *out << std::setprecision(2) << "*****id " << current_id << "*****" <<
             "\nBest result this thread:\t" << bestScore <<
             "\nQ:\t" << bestParameters.Q <<
             "\nK:\t" << bestParameters.K <<
