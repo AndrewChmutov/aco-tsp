@@ -3,20 +3,20 @@
 // C++ standard libraries
 #include <memory>
 #include <vector>
+#include <thread>
 
 // Custom libraries
 #include "base_search.hpp"
 #include "base_strategy.hpp"
 #include "parameter_set.hpp"
 #include "acolony.hpp"
-#include "worker.hpp"
 
 class ACOTuner {
     // Graph
     const std::vector<Point>& graph;
 
     // Control threads
-    std::vector<Worker> workers;
+    std::vector<std::thread> workers;
     std::vector<std::unique_ptr<BaseSearch>> tasks;
     const int n;
 
