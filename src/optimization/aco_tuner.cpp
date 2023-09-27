@@ -16,11 +16,11 @@ ACOTuner::ACOTuner(const ParameterSet& startSearch,
                     int n_jobs, std::ostream* out) :
                 startSearch{startSearch}, 
                 endSearch{endSearch}, 
-                n{n_jobs},
+                n_jobs{n_jobs},
                 out{out} {
     
-    workers.reserve(n);
-    tasks = strategy.generateTasks(startSearch, endSearch, step, n, &mtx, out);
+    workers.reserve(n_jobs);
+    tasks = strategy.generateTasks(startSearch, endSearch, step, n_jobs, &mtx, out);
 }
 
 
@@ -47,15 +47,15 @@ double ACOTuner::getBestScore() const {
 }
 
 
-void ACOTuner::process(int iTask, double limit, std::size_t n) {
-    tasks[iTask]->search(limit, n);
+void ACOTuner::process(int iTask, double limit, std::size_t n_nodes) {
+    tasks[iTask]->search(limit, n_nodes);
 }
+#include <iostream>
 
-
-void ACOTuner::fit(double limit, std::size_t n) {
+void ACOTuner::fit(double limit, std::size_t n_nodes) {
     // Initialize threads
-    for (int i = 0; i < n; i++) {
-        workers.push_back(std::thread{&ACOTuner::process, this, i, limit, n});
+    for (int i = 0; i < n_jobs; i++) {
+        workers.push_back(std::thread{&ACOTuner::process, this, i, limit, n_nodes});
     }
 
     // Join threads

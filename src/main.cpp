@@ -33,5 +33,21 @@ int main(int argc, char* argv[]) {
 
     tuner.fit(1.0, n);
 
+    ParameterSet best = tuner.getBestParameters();
+
+    std::cout << "\n\n\n=====AntColonyTuner=====\n" <<
+            "\nBest result:\t" << tuner.getBestScore() <<
+            "\nQ:\t" << best.Q <<
+            "\nK:\t" << best.K <<
+            "\nalpha\t" << best.alpha <<
+            "\nbeta:\t" << best.beta <<
+            "\nrho:\t" << best.rho << '\n' <<
+            "\npath:\t";
+
+    for (auto& node : tuner.getBestPath())
+        std::cout << node << ' ';
+
+    std::cout << std::endl;
+
     return EXIT_SUCCESS;
 }

@@ -15,7 +15,7 @@ class ACOTuner {
     // Control threads
     std::vector<std::thread> workers;
     std::vector<std::unique_ptr<BaseSearch>> tasks;
-    const int n;
+    const int n_jobs;
 
     // Syncronization and output
     std::mutex mtx;
@@ -30,7 +30,7 @@ class ACOTuner {
     double bestScore{};
 
     // Method for a thread
-    void process(int iTask, double limit, std::size_t n);
+    void process(int iTask, double limit, std::size_t n_nodes);
 
 public:
     ACOTuner(const ParameterSet& startSearch, 
@@ -40,7 +40,7 @@ public:
             int n_jobs, std::ostream* out = nullptr);
 
     // Search best parameters
-    void fit(double limit, std::size_t n);
+    void fit(double limit, std::size_t n_nodes);
 
     // Sets output stream for log details
     void setLogStream(std::ostream* out);
