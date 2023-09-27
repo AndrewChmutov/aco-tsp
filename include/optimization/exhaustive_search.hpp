@@ -5,8 +5,9 @@
 #include "optimization/parameter_set.hpp"
 
 class ExhaustiveSearch : public BaseSearch {
+    static std::size_t id;
 public:
     ExhaustiveSearch(ParameterSet start, ParameterSet end, double step);
 
-    virtual void search() override;
+    virtual void search(double limit, std::size_t n) override;
 };

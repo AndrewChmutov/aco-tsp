@@ -9,20 +9,18 @@
 #include "optimization/base_strategy.hpp"
 #include "optimization/parameter_set.hpp"
 
-ACOTuner::ACOTuner(const std::vector<Point>& graph,
-                    const ParameterSet& startSearch,
+ACOTuner::ACOTuner(const ParameterSet& startSearch,
                     const ParameterSet& endSearch,
                     double step,
                     const BaseStrategy& strategy,
                     int n_jobs, std::ostream* out) :
-                graph{graph}, 
                 startSearch{startSearch}, 
                 endSearch{endSearch}, 
                 n{n_jobs},
                 out{out} {
     
     workers.reserve(n);
-    tasks = strategy.generateTasks(startSearch, endSearch, n, step, &mtx, out);
+    tasks = strategy.generateTasks(startSearch, endSearch, step, n, &mtx, out);
 }
 
 
@@ -49,10 +47,15 @@ double ACOTuner::getBestScore() const {
 }
 
 
-void ACOTuner::fit() {
+void ACOTuner::process(int iTask, double limit, std::size_t n) {
+    tasks[iTask]->search(limit, n);
+}
+
+
+void ACOTuner::fit(double limit, std::size_t n) {
     // Initialize threads
     for (int i = 0; i < n; i++) {
-        workers.push_back(std::thread{&BaseSearch::search, tasks[i].get()});
+        workers.push_back(std::thread{&ACOTuner::process, this, i, limit, n});
     }
 
     // Join threads

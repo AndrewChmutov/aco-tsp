@@ -31,7 +31,7 @@ public:
     // - bestParameters
     // - bestPath
     // - bestScore
-    virtual void search() = 0;
+    virtual void search(double limit, std::size_t n) = 0;
 
     void setLogStream(std::mutex* mtx, std::ostream* out);
 

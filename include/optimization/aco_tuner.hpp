@@ -12,9 +12,6 @@
 #include "acolony.hpp"
 
 class ACOTuner {
-    // Graph
-    const std::vector<Point>& graph;
-
     // Control threads
     std::vector<std::thread> workers;
     std::vector<std::unique_ptr<BaseSearch>> tasks;
@@ -32,16 +29,18 @@ class ACOTuner {
     std::vector<int> bestPath;
     double bestScore{};
 
+    // Method for a thread
+    void process(int iTask, double limit, std::size_t n);
+
 public:
-    ACOTuner(const std::vector<Point>& graph, 
-            const ParameterSet& startSearch, 
+    ACOTuner(const ParameterSet& startSearch, 
             const ParameterSet& endSearch,
             double step,
             const BaseStrategy& strategy,
             int n_jobs, std::ostream* out = nullptr);
 
     // Search best parameters
-    void fit();
+    void fit(double limit, std::size_t n);
 
     // Sets output stream for log details
     void setLogStream(std::ostream* out);
