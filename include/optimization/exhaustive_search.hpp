@@ -6,6 +6,7 @@
 
 class ExhaustiveSearch : public BaseSearch {
     static std::size_t id;
+    std::size_t current_id;
 public:
     ExhaustiveSearch(ParameterSet start, ParameterSet end, double step);
 

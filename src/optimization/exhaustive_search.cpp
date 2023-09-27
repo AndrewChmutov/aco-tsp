@@ -10,7 +10,7 @@
 #include "graph_handler.hpp"
 #include "acolony.hpp"
 
-ExhaustiveSearch::ExhaustiveSearch(ParameterSet start, ParameterSet end, double step) : BaseSearch{start, end, step} { id++; }
+ExhaustiveSearch::ExhaustiveSearch(ParameterSet start, ParameterSet end, double step) : BaseSearch{start, end, step} { current_id = id++; }
 
 std::size_t ExhaustiveSearch::id = 0;
 
@@ -38,7 +38,7 @@ void ExhaustiveSearch::search(double limit, std::size_t n) {
 
         if (out) {
             std::lock_guard<std::mutex> lock{*mtx};
-            *out << "-----id " << id << "-----" <<
+            *out << "-----id " << current_id << "-----" <<
                     "\nQ:\t" << bestParameters.Q <<
                     "\nK:\t" << bestParameters.K <<
                     "\nalpha\t" << bestParameters.alpha <<
@@ -48,7 +48,7 @@ void ExhaustiveSearch::search(double limit, std::size_t n) {
     }
 
     std::lock_guard<std::mutex> lock{*mtx};
-    *out << "*****id " << id << "*****" <<
+    *out << "*****id " << current_id << "*****" <<
             "\nBest result this thread:\t" << bestScore <<
             "\nQ:\t" << bestParameters.Q <<
             "\nK:\t" << bestParameters.K <<
