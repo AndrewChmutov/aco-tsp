@@ -19,7 +19,9 @@ Detailed information you can find on [wikipedia](https://en.wikipedia.org/wiki/A
 
 ## Showcase
 
-TO-DO
+[sample_final1.webm](https://github.com/AndrewChmutov/aco-tsp/assets/67659210/520ac1b5-1e6b-4196-a93e-96c67093d081)
+
+[sample_final2.webm](https://github.com/AndrewChmutov/aco-tsp/assets/67659210/43a82b3f-09be-4e4c-83b2-573d5d186bf3)
 
 ## Installation
 ### Ant Colony Optimization
