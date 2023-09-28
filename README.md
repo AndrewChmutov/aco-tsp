@@ -11,7 +11,15 @@ $\large p^k_{xy} = \frac{(\tau^\alpha_{xy})(\eta^\beta_{xy})}{\sum_{z \in allowe
 
 where 
 
-$\large ant \ k \newline A_k(x) - possible \ expansion \ from \ state \ x \newline p^k_{xy} - probability \ of \ moving \ from \ state \ x \ to \ y \newline \eta_{xy} -  attractiveness \ of \ move \ based \ on \ distance \ \newline \tau_{xy} - attractiveness \ of \ move \ based \ on \ pheromone$
+$\large k^{th}$ - ant
+
+$A_k(x)$ - possible expansion from state x 
+
+$p^k_{xy}$ - probability of moving from state x to y
+
+$\eta_{xy}$ - attractiveness of move based on distance
+
+$\tau_{xy}$ - attractiveness of move based on pheromone$
 
 Detailed information you can find on [wikipedia](https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms).
 
