@@ -69,4 +69,4 @@ tune_tsp(10)
 ## License
 
 Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License.
-See [LICENSE](https://github.com/AndrewChmutov/aco-tsp/blob/master/LICENSE) for more information.
+See [LICENSE](https://github.com/AndrewChmutov/aco-tsp/blob/main/LICENSE) for more information.
