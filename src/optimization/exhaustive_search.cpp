@@ -15,7 +15,7 @@ ExhaustiveSearch::ExhaustiveSearch(ParameterSet start, ParameterSet end, double 
 
 std::size_t ExhaustiveSearch::id = 0;
 
-void ExhaustiveSearch::search(double limit, std::size_t n) {
+void ExhaustiveSearch::search(double limit, std::size_t nodesCount) {
     std::vector<Point> graph;
     double tempResult{};
     bestScore = std::numeric_limits<double>::max();
@@ -23,7 +23,7 @@ void ExhaustiveSearch::search(double limit, std::size_t n) {
     for (double a = startSearch.alpha; a < endSearch.alpha; a += step) {
         for (double b = startSearch.beta; b < endSearch.beta; b += step) {
             for (double p = startSearch.rho; p < endSearch.rho; p += step) {
-                GraphHandler::getGraph(graph, limit, n);
+                GraphHandler::getGraphRandom(graph, limit, nodesCount);
                 AColony colony(graph, a, b, p);
                 
                 colony.fit();
@@ -45,13 +45,7 @@ void ExhaustiveSearch::search(double limit, std::size_t n) {
                     "\nalpha\t" << bestParameters.alpha <<
                     "\nbeta:\t" << bestParameters.beta <<
                     "\nrho:\t" << bestParameters.rho <<
-                    "\nresult:\t" << bestScore <<
-                    "\npath:\t";
-            
-            for (auto& node : bestPath)
-                *out << node << ' ';
-
-            *out << "\n";
+                    "\nresult:\t" << bestScore << '\n';
         }
     }
 

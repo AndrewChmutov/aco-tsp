@@ -10,7 +10,7 @@
 #include "optimization/exhaustive_search.hpp"
 #include "optimization/parameter_set.hpp"
 
-std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const ParameterSet &start, const ParameterSet &end, double step, int n,
+std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const ParameterSet &start, const ParameterSet &end, double step, int jobsCount,
                                                                     std::mutex* mtx, std::ostream* out) const noexcept(false) {
     // Check if domain is given correctly
     if (start.Q > end.Q || 
@@ -22,17 +22,17 @@ std::vector<std::unique_ptr<BaseSearch>> ExhaustiveStrategy::generateTasks(const
     
     // Vector to return
     std::vector<std::unique_ptr<BaseSearch>> tasks;
-    tasks.reserve(n);
+    tasks.reserve(jobsCount);
 
     // Value to changed
-    double alphaDelta = (end.alpha - start.alpha) / n;
+    double alphaDelta = (end.alpha - start.alpha) / jobsCount;
 
     // Temp values
     ParameterSet tempStart{1.0, 1.0, 0.0, 0.0, 0.0};
     ParameterSet tempEnd{1.0, 1.0, 5.0, 5.0, 1.0};
 
     // Break domain by alpha axis
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < jobsCount; i++) {
         tempStart.alpha = alphaDelta * i;
         tempEnd.alpha = alphaDelta * (i + 1);
         tasks.push_back(std::make_unique<ExhaustiveSearch>(tempStart, tempEnd, step));

@@ -15,7 +15,8 @@ int main(int argc, char* argv[]) {
         std::cout << argv[0] << " num_of_nodes" << std::endl;
         exit(EXIT_FAILURE);
     }
-    int n = std::atoi(argv[1]);
+    int nodesCount = std::atoi(argv[1]);
+    int threadCount = 8;
 
     // std::vector<Point> graph;
     // GraphHandler::getGraph(graph, 1.0, std::atoi(argv[1]));
@@ -31,23 +32,17 @@ int main(int argc, char* argv[]) {
     ACOTuner tuner{startSearch, endSearch, 0.1, ExhaustiveStrategy(), 8};
     tuner.setLogStream(&std::cout);
 
-    tuner.fit(1.0, n);
+    tuner.fit(1.0, nodesCount);
 
     ParameterSet best = tuner.getBestParameters();
 
-    std::cout << "\n\n\n=====AntColonyTuner=====\n" <<
+    std::cout << "\n\n\n=====AntColonyTuner: " << nodesCount << " nodes=====\n" <<
             "\nBest result:\t" << tuner.getBestScore() <<
             "\nQ:\t" << best.Q <<
             "\nK:\t" << best.K <<
             "\nalpha\t" << best.alpha <<
             "\nbeta:\t" << best.beta <<
-            "\nrho:\t" << best.rho << '\n' <<
-            "\npath:\t";
-
-    for (auto& node : tuner.getBestPath())
-        std::cout << node << ' ';
-
-    std::cout << std::endl;
+            "\nrho:\t" << best.rho << '\n';
 
     return EXIT_SUCCESS;
 }

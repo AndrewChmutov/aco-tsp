@@ -20,6 +20,22 @@ void GraphHandler::getGraph(std::vector<Point> &graph, const double limit, const
 }
 
 
+void GraphHandler::getGraphRandom(std::vector<Point> &graph, const double limit, const std::size_t size) {
+    // Random engine
+    std::random_device rd;
+    std::mt19937 randEngine(rd());
+    // Distribution for generation
+    std::uniform_real_distribution<double> dist(0, limit);
+
+    // Fill graph with random coords
+    graph.resize(size);
+    for (auto& [x, y] : graph) {
+        x = dist(randEngine);
+        y = dist(randEngine);
+    }
+}
+
+
 void GraphHandler::writeGraph(const std::vector<Point> &graph, const std::string &path) {
     // Output file
     std::ofstream file(path);
