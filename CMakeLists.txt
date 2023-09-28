@@ -13,6 +13,12 @@ add_executable(ant
     src/main.cpp
     src/graph_handler.cpp
     src/acolony.cpp
+)
+
+add_executable(ant_optimize
+    src/ant_optimize.cpp
+    src/graph_handler.cpp
+    src/acolony.cpp
     src/optimization/base_search.cpp
     src/optimization/aco_tuner.cpp
     src/optimization/exhaustive_search.cpp
