@@ -18,19 +18,11 @@ int main(int argc, char* argv[]) {
     int nodesCount = std::atoi(argv[1]);
     int threadCount = 8;
 
-    // std::vector<Point> graph;
-    // GraphHandler::getGraph(graph, 1.0, std::atoi(argv[1]));
-    // GraphHandler::writeGraph(graph, "data/graph.csv");
-
-    // AColony colony{graph, 1.5, 4.2, 0.8};
-    // colony.fit();
-    // colony.writeTSP("data/path.txt");
-
     ParameterSet startSearch {1.0, 1.0, 0.1, 0.1, 0.1};
     ParameterSet endSearch {1.0, 1.0, 5.0, 5.0, 1.0};
 
     ACOTuner tuner{startSearch, endSearch, 0.1, ExhaustiveStrategy(), 8};
-    tuner.setLogStream(&std::cout);
+    // tuner.setLogStream(&std::cout);
 
     tuner.fit(1.0, nodesCount);
 

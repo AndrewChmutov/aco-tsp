@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     double rho = std::stod(argv[4]);
 
     std::vector<Point> graph;
-    GraphHandler::getGraph(graph, 1.0, std::atoi(argv[1]));
+    GraphHandler::getGraphRandom(graph, 1.0, std::atoi(argv[1]));
     GraphHandler::writeGraph(graph, "data/graph.csv");
 
     AColony colony{graph, alpha, beta, rho};

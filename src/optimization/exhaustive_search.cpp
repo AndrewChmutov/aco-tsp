@@ -49,12 +49,14 @@ void ExhaustiveSearch::search(double limit, std::size_t nodesCount) {
         }
     }
 
-    std::lock_guard<std::mutex> lock{*mtx};
-    *out << std::setprecision(2) << "*****id " << current_id << "*****" <<
-            "\nBest result this thread:\t" << bestScore <<
-            "\nQ:\t" << bestParameters.Q <<
-            "\nK:\t" << bestParameters.K <<
-            "\nalpha\t" << bestParameters.alpha <<
-            "\nbeta:\t" << bestParameters.beta <<
-            "\nrho:\t" << bestParameters.rho << '\n';
+    if (out) {
+        std::lock_guard<std::mutex> lock{*mtx};
+        *out << std::setprecision(2) << "*****id " << current_id << "*****" <<
+                "\nBest result this thread:\t" << bestScore <<
+                "\nQ:\t" << bestParameters.Q <<
+                "\nK:\t" << bestParameters.K <<
+                "\nalpha\t" << bestParameters.alpha <<
+                "\nbeta:\t" << bestParameters.beta <<
+                "\nrho:\t" << bestParameters.rho << '\n';
+    }
 }
