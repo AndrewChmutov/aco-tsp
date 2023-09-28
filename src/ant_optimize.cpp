@@ -11,10 +11,20 @@
 #include "optimization/exhaustive_strategy.hpp"
 
 int main(int argc, char* argv[]) {
+    bool logOnline = false;
     if (argc < 2) {
         std::cout << argv[0] << " num_of_nodes" << std::endl;
         exit(EXIT_FAILURE);
     }
+    
+    for (int i = 1; i < argc; i++) {
+        if (std::string{argv[i]} == "-o") {
+            logOnline = true;
+            break;
+        }
+
+    }
+        
     int nodesCount = std::atoi(argv[1]);
     int threadCount = 8;
 
@@ -22,7 +32,9 @@ int main(int argc, char* argv[]) {
     ParameterSet endSearch {1.0, 1.0, 5.0, 5.0, 1.0};
 
     ACOTuner tuner{startSearch, endSearch, 0.1, ExhaustiveStrategy(), 8};
-    // tuner.setLogStream(&std::cout);
+
+    if (logOnline)
+        tuner.setLogStream(&std::cout);
 
     tuner.fit(1.0, nodesCount);
 
